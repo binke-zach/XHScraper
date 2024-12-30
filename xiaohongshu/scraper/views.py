@@ -13,8 +13,8 @@ def scraper_view(request):
             keyword = form.cleaned_data['keyword']
             xhs_id = form.cleaned_data['xhs_id']
 
-            # 假设爬虫程序是一个 Python 脚本，调用爬虫程序并获取图片
-            # 示例：调用爬虫并传递参数，返回图片路径
+            # 调用爬虫程序并获取图片
+            # 调用爬虫并传递参数，返回图片路径
             result_image_path = run_scraper(keyword, xhs_id)
 
             # 保存爬取结果到数据库
@@ -31,13 +31,12 @@ def scraper_view(request):
     return render(request, 'scraper/index.html', {'form': form})
 
 def run_scraper(keyword, xhs_id):
-    # 这里调用爬虫程序，传入参数并获取生成的 PNG 图片
-    # 例如，我们调用一个外部 Python 脚本来执行爬取，并将结果存储为图片
+    # 调用爬虫程序，传入参数并获取生成的 PNG 图片
+    # 调用一个外部 Python 脚本来执行爬取，并将结果存储为图片
     # Popen 用于启动外部进程
-    command = f"python3 /path/to/your/scraper_script.py --keyword {keyword} --id {xhs_id}"
+    command = f"python3 /path/to/your/scraper_script.py --keyword {keyword}"
     process = Popen(command, shell=True, stdout=PIPE, stderr=PIPE)
     stdout, stderr = process.communicate()
 
-    # 假设脚本返回的图片文件存储在 /path/to/save/result.png
     # 返回文件路径
     return "/media/scraper_results/result.png"
