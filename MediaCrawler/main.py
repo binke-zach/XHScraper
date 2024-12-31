@@ -52,6 +52,9 @@ async def main(platform:str,type="search",keywords=None,id=None):
     if config.SAVE_DATA_OPTION == "db":
         await db.init_db()
 
+    if type == None:
+        type = config.CRAWLER_TYPE
+
     if platform not in ["xhs","dy","ks","bili","wb","tieba","zhihu"]:
          platform = config.PLATFORM
     crawler = CrawlerFactory.create_crawler(platform=platform)
@@ -68,7 +71,7 @@ def run_main_task(platform:str,type: str,keywords:str, id: list):
         sys.exit()
     
 if __name__ == '__main__':
-    run_main_task("xhs","search",None,None)
+    run_main_task("xhs",None,None,None)
     # search "keyword1" None 
     # creator None ["xxx","xxx"]
 
