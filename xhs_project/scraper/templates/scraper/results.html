@@ -1,0 +1,26 @@
+<!-- scraper/templates/scraper/results.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>结果 - {{ keyword }}</title>
+</head>
+<body>
+    <h1>事件关键词: {{ keyword }}</h1>
+
+    <h2>关键词热度云图</h2>
+    <img src="{{ images.0 }}" alt="关键词热度云图" width="600">
+    
+    <h2>情绪倾向分析</h2>
+    <img src="{{ images.1 }}" alt="情绪倾向分析" width="600">
+    
+    <h2>情感分析</h2>
+    <img src="{{ images.2 }}" alt="情感分析" width="600">
+    
+    <h2>事件月份热度分析</h2>
+    <img src="{{ images.3 }}" alt="事件月份热度分析" width="600">
+    
+    <a href="/">返回首页</a>
+</body>
+</html>

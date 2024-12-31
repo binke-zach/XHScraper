@@ -1,0 +1,19 @@
+配置与项目逻辑流程（简陋版）
+
+
+
+环境配置：
+
+
+
+
+
+
+
+
+项目流程逻辑：
+MediaCrawler程序根据输入生成爬虫结果，保存为.json文件
+
+hyosrt里将爬虫结果读取并依次运行.py文件来输出.png图片结果（1cloud.png/2emotion.png/3emotion.png） ，运行前配置api
+
+根据同名.json文件生成依次运行.py文件，输出.png图片结果（heatmap.png），运行前配置cookie
