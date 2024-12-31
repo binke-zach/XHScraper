@@ -33,8 +33,9 @@ SECRET_KEY = ""
    ```
 
 ## 运行爬虫程序
-    ```shell
+   ```shell
    cd xhs_project
    python manage.py migrate
    python manage.py runserver
    ```
+   
