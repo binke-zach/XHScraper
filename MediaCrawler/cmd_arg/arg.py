@@ -28,6 +28,8 @@ async def parse_cmd():
                         help='number of start page', default=config.START_PAGE)
     parser.add_argument('--keywords', type=str,
                         help='please input keywords', default=config.KEYWORDS)
+    parser.add_argument('--id', nargs='*', type=str, 
+                        help='A list of IDs (strings)',default=config.XHS_CREATOR_ID_LIST)
     parser.add_argument('--get_comment', type=str2bool,
                         help='''whether to crawl level one comment, supported values case insensitive ('yes', 'true', 't', 'y', '1', 'no', 'false', 'f', 'n', '0')''', default=config.ENABLE_GET_COMMENTS)
     parser.add_argument('--get_sub_comment', type=str2bool,
@@ -47,5 +49,6 @@ async def parse_cmd():
     config.KEYWORDS = args.keywords
     config.ENABLE_GET_COMMENTS = args.get_comment
     config.ENABLE_GET_SUB_COMMENTS = args.get_sub_comment
+    config.XHS_CREATOR_ID_LIST = args.id
     config.SAVE_DATA_OPTION = args.save_data_option
     config.COOKIES = args.cookies

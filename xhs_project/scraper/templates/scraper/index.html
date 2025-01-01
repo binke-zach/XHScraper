@@ -7,11 +7,24 @@
     <title>小红书爬虫</title>
 </head>
 <body>
-    <h1>请输入事件关键词</h1>
+    <h1>请输入事件关键词或ID</h1>
+    
+    <!-- 关键词提交表单 -->
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">提交</button>
+        <button type="submit">提交关键词</button>
+    </form>
+
+    <hr>
+
+    <!-- 或者 ID 提交表单 -->
+    <h2>或者输入小红书ID</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="id">请输入小红书ID</label>
+        <input type="text" name="id" id="id" required>
+        <button type="submit">提交ID</button>
     </form>
 </body>
 </html>

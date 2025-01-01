@@ -5,7 +5,7 @@ import shutil
 from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import KeywordForm
+from .forms import KeywordForm, IDForm  # 引入 IDForm
 
 def move_images_to_media():
     """
@@ -26,15 +26,22 @@ def move_images_to_media():
         if os.path.exists(src_path):
             shutil.move(src_path, dst_path)
 
-def run_scraper(keyword):
+def run_scraper(keyword=None, user_id=None, search_type="search"):
     """
     运行爬虫程序，依次调用相关的 Python 脚本
     """
+    # 判断是根据关键词还是 ID 来运行爬虫
+    if user_id:
+        command = f"python main.py --type creator --id {user_id}"
+    elif keyword:
+        command = f"python main.py --type search --keywords {keyword}"
+    else:
+        raise ValueError("No valid input provided for keyword or ID")
+
     # 运行 main.py 脚本
-    command = f"python main.py --keywords {keyword}"
     subprocess.run(command, shell=True, cwd=os.path.join(settings.BASE_DIR, 'MediaCrawler'))
 
-   # 运行 hy 目录下的脚本
+    # 运行 hy 目录下的脚本
     hy_scripts = [
         'hysort.py', 'hycloud.py', 'hyemotion.py', 'hyapi.py'
     ]
@@ -59,16 +66,24 @@ def run_scraper(keyword):
     ]
 
 def index(request):
+    """
+    展示关键词/ID输入页面
+    """
     if request.method == 'POST':
-        form = KeywordForm(request.POST)
-        if form.is_valid():
-            keyword = form.cleaned_data['keyword']
+        # 判断是提交关键词还是ID
+        if 'keyword' in request.POST:
+            form = KeywordForm(request.POST)
+            if form.is_valid():
+                keyword = form.cleaned_data['keyword']
+                image_paths = run_scraper(keyword=keyword)  # 按关键词运行爬虫
+                return render(request, 'scraper/results.html', {'images': image_paths, 'keyword': keyword})
+        elif 'id' in request.POST:
+            form = IDForm(request.POST)
+            if form.is_valid():
+                user_id = form.cleaned_data['id']
+                image_paths = run_scraper(user_id=user_id, search_type="creator")  # 按 ID 运行爬虫
+                return render(request, 'scraper/results.html', {'images': image_paths, 'user_id': user_id})
 
-            # 调用爬虫程序并获取图片路径
-            image_paths = run_scraper(keyword)
-
-            # 将图片路径传递到模板
-            return render(request, 'scraper/results.html', {'images': image_paths, 'keyword': keyword})
     else:
         form = KeywordForm()
 
