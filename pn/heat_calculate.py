@@ -34,21 +34,27 @@ def calculate_hotness(post):
     comment_count = clean_count(post['comment_count'])
     share_count = clean_count(post['share_count'])
     # 假设系数
-    like_weight = 0.25
+    like_weight = 0.3
     collect_weight = 0.3
-    comment_weight = 0.25
-    share_weight = 0.02  
+    comment_weight = 0.2
+    share_weight = 0.2
     alpha = 0.001  # 转发按指数增长
     
-    # 限制指数增长，防止溢出
-    max_share_exp = 1000  # 最大的指数值
-    share_count_exp = min(share_count, max_share_exp)  # 限制最大值
-    share_count_exp = math.exp(alpha * share_count_exp)  # 计算指数值
-
-    # 基础热度计算
-    hotness = (liked_count * like_weight + collected_count * collect_weight + comment_count * comment_weight + math.exp(alpha * share_count) * share_weight)
-
+    if share_count <= 8000:
+        hotness = liked_count * like_weight + collected_count * collect_weight + comment_count * comment_weight + share_count * share_weight 
+    elif share_count <= 10000:
+        hotness1 = liked_count * like_weight + collected_count * collect_weight + comment_count * comment_weight + share_count * share_weight
+        hotness2 = liked_count * like_weight + collected_count * collect_weight + comment_count * comment_weight + share_weight * math.exp(alpha * share_count)
+        hotness = max(hotness1, hotness2)
+    elif share_count <= 12000:
+        hotness2 = liked_count * like_weight + collected_count * collect_weight + comment_count * comment_weight + share_weight * math.exp(alpha * share_count)
+        hotness3 = liked_count * like_weight + collected_count * collect_weight + comment_count * comment_weight + share_count * share_weight + 5000
+        hotness = max(hotness2, hotness3)
+    else:
+        hotness = liked_count * like_weight + collected_count * collect_weight + comment_count * comment_weight + share_count * share_weight + 5000
+     
     return hotness
+
 
 # 计算每个帖子的热度并排序
 def process_posts(posts):
