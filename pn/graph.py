@@ -66,9 +66,9 @@ def plot_heatmap(city_monthly_hotness, output_file='heatmap.png'):
 
     plt.xlabel('Month')
     plt.ylabel('Heat')
-    plt.title('2024 Travel City Heat Over Months')
+    
     plt.xticks(months)  # 设置横轴为1到12月份
-    plt.legend()  # 显示城市的图例
+    
     plt.grid(True)
     
     # 保存图像到文件
@@ -76,7 +76,7 @@ def plot_heatmap(city_monthly_hotness, output_file='heatmap.png'):
     print(f"Heatmap saved to {output_file}")
     
     # 显示图像
-    plt.show()
+    
 
 # 主程序
 if __name__ == "__main__":

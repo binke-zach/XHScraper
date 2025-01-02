@@ -102,7 +102,7 @@ def main():
     print(f"图像已保存为 {save_path}")
 
     # 显示图形
-    plt.show()
+    
 
 
 if __name__ == '__main__':

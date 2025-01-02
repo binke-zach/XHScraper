@@ -1,5 +1,5 @@
 
-f# scraper/forms.py
+# scraper/forms.py
 from django import forms
 
 class KeywordForm(forms.Form):

@@ -1,7 +1,7 @@
 import json
 
 # 读取 JSON 文件
-with open('..\\MediaCrawler\\data\\xhs\\json\\search_contents_2024-12-30.json', 'r', encoding='utf-8') as file:
+with open('..\\MediaCrawler\\data\\xhs\\json\\search_contents_2025-01-02.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
 
 # 遍历每条记录，合并字段，并删除原字段

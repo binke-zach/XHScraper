@@ -80,7 +80,7 @@ def process_posts(posts):
 
 
 if __name__ == "__main__":
-    file_path = "..\\MediaCrawler\\data\\xhs\\json\\search_contents_2024-12-30.json"
+    file_path = "..\\MediaCrawler\\data\\xhs\\json\\search_contents_2025-01-02.json"
 
     posts = load_contents_data(file_path)
 

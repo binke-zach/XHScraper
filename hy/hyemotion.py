@@ -80,9 +80,9 @@ def plot_bar_chart(emotion_count, save_path):
     # 保存图像为png文件
     plt.savefig(save_path, format='png', dpi=300)  # 设置文件路径和dpi
     print(f"图像已保存为 {save_path}")
-
+    
     # 显示图表
-    plt.show()
+    
 
 
 if __name__ == '__main__':

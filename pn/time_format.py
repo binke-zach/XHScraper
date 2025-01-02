@@ -2,7 +2,7 @@ import json
 import datetime
 
 # 读取JSON文件中的评论数据
-with open('..\\MediaCrawler\\data\\xhs\\json\\search_comments_2024-12-30.json', 'r', encoding='utf-8') as f:
+with open('..\\MediaCrawler\\data\\xhs\\json\\search_comments_2025-01-02.json', 'r', encoding='utf-8') as f:
     comments = json.load(f)
 
 # 按like_count降序排序，注意like_count是字符串类型，需要先转为整数进行排序
